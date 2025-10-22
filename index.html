@@ -188,6 +188,25 @@
       color: #059669;
       font-weight: 600;
     }
+
+    details {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    summary {
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    summary:hover {
+      background: rgba(16, 185, 129, 0.1);
+    }
   </style>
 </head>
 
@@ -224,7 +243,7 @@
       <div>
         <label class="font-semibold text-gray-700">⏱️ Durée de vol (secondes)</label>
         <div class="range-wrap mt-2">
-          <input type="range" id="flightTime" min="2" max="6" step="0.01" value="4.00">
+          <input type="range" id="flightTime" min="2" max="8" step="0.01" value="4.00">
           <div class="range-value" id="flightTimeValue">4.00 s</div>
         </div>
         <div class="precise-controls">
@@ -262,32 +281,39 @@
       </div>
     </div>
 
-    <!-- Résultats -->
-    <div class="glass grid grid-cols-1 sm:grid-cols-2 gap-3 text-center">
-      <div>
-        <div class="text-sm text-gray-600">Théorique</div>
-        <div class="text-3xl text-blue-600 font-bold" id="idealDistance">0.0 m</div>
+    <!-- Résultats principaux -->
+    <div class="glass">
+      <div class="text-center mb-4">
+        <div class="text-sm text-gray-600">🎯 Distance empirique</div>
+        <div class="text-4xl text-orange-600 font-bold" id="simplifiedDistance">0.0 m</div>
       </div>
-      <div>
-        <div class="text-sm text-gray-600">Avec traînée</div>
-        <div class="text-3xl text-indigo-600 font-bold" id="dragDistance">0.0 m</div>
-      </div>
-      <div>
-        <div class="text-sm text-gray-600">Effet Magnus</div>
-        <div class="text-3xl text-emerald-600 font-bold" id="magnusDistance">0.0 m</div>
-      </div>
-      <div>
-        <div class="text-sm text-gray-600">Empirique</div>
-        <div class="text-3xl text-orange-600 font-bold" id="simplifiedDistance">0.0 m</div>
+      <div class="grid grid-cols-2 gap-3 text-center border-t pt-3">
+        <div>
+          <div class="text-xs text-gray-500">💨 Vitesse</div>
+          <div class="text-xl text-green-700 font-bold" id="velocity">0.0 m/s</div>
+          <div class="text-xs text-green-600" id="velocityKmh">0.0 km/h</div>
+        </div>
+        <div>
+          <div class="text-xs text-gray-500">📏 Effet Magnus</div>
+          <div class="text-xl text-emerald-600 font-bold" id="magnusDistance">0.0 m</div>
+        </div>
       </div>
     </div>
 
-    <!-- Vitesse -->
-    <div class="glass text-center">
-      <div class="text-sm text-gray-600">💨 Vitesse initiale</div>
-      <div class="text-3xl text-green-700 font-bold" id="velocity">0.0 m/s</div>
-      <div class="text-sm text-green-600" id="velocityKmh">0.0 km/h</div>
-    </div>
+    <!-- Résultats détaillés (repliable) -->
+    <details class="glass">
+      <summary class="cursor-pointer font-semibold text-gray-700 text-center">📊 Détails des calculs</summary>
+      <div class="grid grid-cols-2 gap-3 text-center mt-3">
+        <div>
+          <div class="text-xs text-gray-600">Théorique</div>
+          <div class="text-lg text-blue-600 font-bold" id="idealDistance">0.0 m</div>
+        </div>
+        <div>
+          <div class="text-xs text-gray-600">Avec traînée</div>
+          <div class="text-lg text-indigo-600 font-bold" id="dragDistance">0.0 m</div>
+        </div>
+      </div>
+    </details>
   </div>
 
   <script>
@@ -329,7 +355,7 @@
           updateResults();
           document.getElementById('stopwatchStatus').textContent = '✅ Temps appliqué : ' + finalTime + ' s';
         } else {
-          document.getElementById('stopwatchStatus').textContent = '⚠️ Temps hors limites (2-6s)';
+          document.getElementById('stopwatchStatus').textContent = '⚠️ Temps hors limites (2-8s)';
         }
         
         document.getElementById('startBtn').disabled = false;
