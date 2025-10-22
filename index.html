@@ -112,15 +112,15 @@
 
     .stopwatch {
       text-align: center;
-      padding: 1rem;
+      padding: 0.75rem;
     }
 
     .stopwatch-display {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
       color: #059669;
       font-family: 'Courier New', monospace;
-      margin: 0.5rem 0;
+      margin: 0.25rem 0;
       text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
@@ -128,18 +128,20 @@
       display: flex;
       gap: 0.5rem;
       justify-content: center;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
 
     .stopwatch-btn {
-      padding: 0.5rem 1rem;
+      padding: 0.4rem 0.75rem;
       border: none;
       border-radius: 0.5rem;
       font-weight: bold;
-      font-size: 0.875rem;
+      font-size: 0.75rem;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      flex: 1;
+      white-space: nowrap;
     }
 
     .btn-start {
@@ -225,11 +227,11 @@
     <!-- Chronomètre -->
     <div class="glass">
       <div class="stopwatch">
-        <label class="font-semibold text-gray-700 text-base">⏱️ Chronomètre de vol</label>
+        <label class="font-semibold text-gray-700 text-sm">⏱️ Chronomètre</label>
         <div class="stopwatch-display" id="stopwatchDisplay">0.00</div>
         <div class="stopwatch-buttons">
-          <button class="stopwatch-btn btn-start" id="startBtn" onclick="startStopwatch()">▶ Démarrer</button>
-          <button class="stopwatch-btn btn-stop" id="stopBtn" onclick="stopStopwatch()" disabled>⏸ Arrêter</button>
+          <button class="stopwatch-btn btn-start" id="startBtn" onclick="startStopwatch()">▶ Start</button>
+          <button class="stopwatch-btn btn-stop" id="stopBtn" onclick="stopStopwatch()" disabled>⏸ Stop</button>
           <button class="stopwatch-btn btn-reset" id="resetBtn" onclick="resetStopwatch()">↻ Reset</button>
         </div>
         <div class="stopwatch-status" id="stopwatchStatus"></div>
